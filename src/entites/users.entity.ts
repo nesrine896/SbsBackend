@@ -1,5 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column,ManyToOne, ManyToMany, JoinTable} from 'typeorm';
+import { Fiche } from './fiche.entity';
+import { ProjectAff } from './projectAffec.entity';
+import { Role } from './role.entity';
+
 
 @Entity()
 export class Users {
@@ -23,21 +27,18 @@ export class Users {
   public brithday: Date;
 
   @Column({ type: 'varchar', length: 8 })
-  public post: string;
+  public categories: string;
 
   @Column({ type: 'varchar', length: 8 })
   public phone: string;
 
-  // @Column({ type: 'boolean', default: false })
-  // public isDeleted: boolean;
-
-  // /*
-  //  * Create and Update Date Columns
-  //  */
-
-  // @CreateDateColumn({ type: 'timestamp' })
-  // public createdAt!: Date;
-
-  // @UpdateDateColumn({ type: 'timestamp' })
-  // public updatedAt!: Date;
+  @ManyToMany(() => Role)
+  @JoinTable()
+    rolesAffected: Role[];
+  
+  @ManyToOne(() => ProjectAff)
+  projectAff: ProjectAff
+   
+  @ManyToOne(() => Fiche)
+  fiche: Fiche;
 }

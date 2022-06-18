@@ -7,8 +7,8 @@ import { Body,
         ParseIntPipe, 
         Post} from '@nestjs/common';
 
-import { UsersDTO } from '../auth/dto/users.dto';
-import { Users } from './users.entity';
+import { UsersDTO } from '../security/auth/dto/users.dto';
+import { Users } from '../entites/users.entity';
 import { UserService } from './user.service';
 @Controller('user')
 export class UserController {

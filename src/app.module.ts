@@ -6,7 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { getEnvPath } from './common/helper/env.helper';
 import { TypeOrmConfigService } from './shared/typeorm/typeorm.service';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './security/auth/auth.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
 
@@ -17,7 +17,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
       useClass: TypeOrmConfigService,
       inject: [ConfigService]
     }),
-    AuthModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
