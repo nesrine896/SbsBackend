@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
+import { ProjetAff } from 'src/projet-affected/entities/projet-affected.entity';
+import { Projet } from 'src/projet/entities/projet.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne} from 'typeorm';
-import { Project } from './project.entity';
-import { ProjectAff } from './projectAffec.entity';
 
 @Entity()
 export class Admin {
@@ -20,9 +20,9 @@ export class Admin {
   // @ManyToMany(() => Users)
   // @JoinTable()
   //   users: Users[];
-  @ManyToOne(() => ProjectAff)
-  projectAff: ProjectAff
+  @ManyToOne(() => ProjetAff)
+  projectAff: ProjetAff
     
-  @ManyToOne(() => Project)
-  Project: Project;
+  @ManyToOne(() => Projet)
+  Project: Projet;
 }

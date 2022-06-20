@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
+import { Fiche } from 'src/fiche/entities/fiche.entity';
+import {ProjetAff } from 'src/projet-affected/entities/projet-affected.entity';
+import { Role } from 'src/role/entities/role.entity';
+import { RoleAffect } from 'src/roleaffect/entities/roleaffect.entity';
 import { Entity, PrimaryGeneratedColumn, Column,ManyToOne, ManyToMany, JoinTable} from 'typeorm';
-import { Fiche } from './fiche.entity';
-import { ProjectAff } from './projectAffec.entity';
-import { Role } from './role.entity';
 
 
 @Entity()
@@ -27,7 +28,7 @@ export class Users {
   public brithday: Date;
 
   @Column({ type: 'varchar', length: 8 })
-  public categories: string;
+  public categorie: string;
 
   @Column({ type: 'varchar', length: 8 })
   public phone: string;
@@ -36,9 +37,11 @@ export class Users {
   @JoinTable()
     rolesAffected: Role[];
   
-  @ManyToOne(() => ProjectAff)
-  projectAff: ProjectAff
+  @ManyToOne(() => ProjetAff)
+  projectAff: ProjetAff
    
   @ManyToOne(() => Fiche)
   fiche: Fiche;
+  @ManyToOne(() => RoleAffect)
+  roleAffect: RoleAffect;
 }

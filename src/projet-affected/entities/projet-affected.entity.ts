@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
+import { Tache } from 'src/tache/entities/tache.entity';
 import { Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import { Tache } from './taches.entity';
+
 
 
 @Entity()
-export class ProjectAff {
+export class ProjetAff {
   @PrimaryGeneratedColumn()
   public id!: number;
 

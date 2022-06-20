@@ -1,17 +1,24 @@
 /* eslint-disable prettier/prettier */
-import {IsDateString, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class UsersDTO {
   @IsString()
+  @IsOptional()
   nom: string;
   @IsString()
   email: string;
   @IsString()
   password: string;
-  @IsDateString()
+  @IsString()
+  @IsOptional()
   brithday: Date;
   @IsString()
-  post: string;  
-  @IsString()
+  @IsOptional()
   imageProfil: string; 
+  @IsString()
+  @IsOptional()
+  categorie: string;
+  @IsString()
+  @IsOptional()
+  phone: string;
 }

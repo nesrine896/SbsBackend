@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
+import { ProjetAff } from 'src/projet-affected/entities/projet-affected.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne} from 'typeorm';
-import { ProjectAff } from './projectAffec.entity';
+
 
 
 @Entity()
@@ -11,6 +12,6 @@ export class Client {
   @Column({ type: 'varchar', length: 120 })
   public codeClient?: string;
   
-  @ManyToOne(() => ProjectAff)
-  projectAff: ProjectAff
+  @ManyToOne(() => ProjetAff)
+  projectAff: ProjetAff
 }

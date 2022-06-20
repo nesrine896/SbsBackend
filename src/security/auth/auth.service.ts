@@ -5,10 +5,11 @@ import { validate } from 'class-validator';
 import { JwtService } from '@nestjs/jwt';
 import { LoggerService } from './logger/logger.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from 'src/entites/users.entity';
+
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import { Users } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -24,7 +25,6 @@ export class AuthService {
     try {
     // Transform body into DTO
     const userDTO = new UsersDTO();
-    userDTO .nom = user.nom;
     userDTO.email = user.email;
     userDTO.password = user.password;
       await validate(userDTO).then((errors) => {
@@ -76,8 +76,9 @@ export class AuthService {
     userDTO.nom = body.nom;
     userDTO.email = body.email;
     userDTO.brithday = body.brithday;
-    userDTO.post = body.post;
+    userDTO.categorie = body.categorie;
     userDTO.imageProfil = body.imageProfil;
+    userDTO.phone = body.phone;
     userDTO.password = bcrypt.hashSync(body.password, 10);
 
     // Validate DTO against validate function from class-validator

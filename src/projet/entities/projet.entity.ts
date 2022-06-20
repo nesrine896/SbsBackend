@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
+import { Facture } from 'src/facture/entities/facture.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne} from 'typeorm';
-import { Facture } from './facture.entity';
+
 
 @Entity()
-export class Project {
+export class Projet {
   @PrimaryGeneratedColumn()
   public id!: number;
 
