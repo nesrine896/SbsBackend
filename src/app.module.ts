@@ -16,7 +16,8 @@ import { FicheModule } from './fiche/fiche.module';
 import { FactureModule } from './facture/facture.module';
 import { TacheModule } from './tache/tache.module';
 import { ClientModule } from './client/client.module';
-import { RoleaffectModule } from './roleaffect/roleaffect.module';
+import { RoletouserModule } from './roletouser/roletouser.module';
+
 
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
@@ -38,7 +39,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
     FactureModule,
     TacheModule,
     ClientModule,
-    RoleaffectModule,
+    RoletouserModule
   ],
   controllers: [AppController],
   providers: [AppService],

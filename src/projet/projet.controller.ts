@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Controller, Get, Post, Body,Param, Delete, Put } from '@nestjs/common';
 import { ProjetService } from './projet.service';
 import { CreateProjetDto } from './dto/create-projet.dto';
 import { UpdateProjetDto } from './dto/update-projet.dto';
@@ -9,26 +10,26 @@ export class ProjetController {
 
   @Post()
   create(@Body() createProjetDto: CreateProjetDto) {
-    return this.projetService.create(createProjetDto);
+    return this.projetService.createProjet(createProjetDto);
   }
 
   @Get()
   findAll() {
-    return this.projetService.findAll();
+    return this.projetService.getAllProjet();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.projetService.findOne(+id);
+    return this.projetService.getProjetById(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateProjetDto: UpdateProjetDto) {
-    return this.projetService.update(+id, updateProjetDto);
+    return this.projetService.updateProjet(+id, updateProjetDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.projetService.remove(+id);
+    return this.projetService.deleteProjet(+id);
   }
 }

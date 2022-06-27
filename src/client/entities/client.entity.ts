@@ -11,6 +11,8 @@ export class Client {
 
   @Column({ type: 'varchar', length: 120 })
   public codeClient?: string;
+  @Column({ type: 'varchar', length: 120 })
+  public nomClient?: string;
   
   @ManyToOne(() => ProjetAff)
   projectAff: ProjetAff

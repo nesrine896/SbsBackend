@@ -1,26 +1,52 @@
-import { Injectable } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
+import { Admin } from './entities/admin.entity';
 
 @Injectable()
 export class AdminService {
-  create(createAdminDto: CreateAdminDto) {
-    return 'This action adds a new admin';
+  constructor(
+    @InjectRepository(Admin) private repository: Repository<Admin>,
+  ) {}
+
+  async getAllAdmin(){
+    return this.repository.find();
   }
 
-  findAll() {
-    return `This action returns all admin`;
+
+  async getAdminById(id: number): Promise<Admin> {
+    const admin = this.repository.findOne(id);
+    if(admin) {
+      return admin;
+    }
+    throw new HttpException('Admin not found', HttpStatus.NOT_FOUND);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} admin`;
+  public createAdmin(body: CreateAdminDto): Promise<Admin> {
+    const admin: Admin = new Admin();
+    admin.nom = body.nom;
+    admin.email = body.email;
+    admin.password = body.password;
+
+    return this.repository.save(admin);
+}
+
+async updateAdmin(id: number, admin: UpdateAdminDto) {
+  await this.repository.update(id, admin);
+  const updatedAdmin = await this.repository.findOne(id);
+  if (updatedAdmin) {
+    return updatedAdmin;
   }
 
-  update(id: number, updateAdminDto: UpdateAdminDto) {
-    return `This action updates a #${id} admin`;
+  throw new HttpException('admin not found', HttpStatus.NOT_FOUND);
+}
+async deleteAdmin(id: number) {
+  const deletedAdmin = await this.repository.delete(id);
+  if (!deletedAdmin.affected) {
+    throw new HttpException('Admin not found', HttpStatus.NOT_FOUND);
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} admin`;
-  }
+}
 }

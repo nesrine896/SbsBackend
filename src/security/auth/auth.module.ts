@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
-import { LoggerModule } from './logger/logger.module';
+
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { LoggerModule } from './logger/logger.module';
 import { Users } from 'src/user/entities/user.entity';
+
+// eslint-disable-next-line prettier/prettier
 
 @Module({
   imports: [
@@ -18,7 +21,7 @@ import { Users } from 'src/user/entities/user.entity';
       useFactory: (configService: ConfigService) => {
         return {
           privateKey: configService.get<string>('keys.privateKey'),
-          publicKey: 'mysecretKey',
+          publicKey: configService.get<string>('keys.publicKey'),
           signOptions: { expiresIn: '60s', algorithm: 'RS256' },
         };
       },

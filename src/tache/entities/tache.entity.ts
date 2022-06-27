@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { UserRole } from 'src/enum/UserRole';
 import { Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
 
 
@@ -8,7 +9,7 @@ export class Tache {
   public id!: number;
 
   @Column({ type: 'varchar', length: 120 })
-  public tacheR?: string;
+  public tacheR?: UserRole;
 
   @Column()
   public isUrgent?: boolean;

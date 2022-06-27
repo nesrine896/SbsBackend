@@ -7,7 +7,7 @@ export class Fiche {
   public id!: number;
 
   @Column({ type: 'varchar', length: 120 })
-  public Frais_transport?: string;
+  public frais_transport?: string;
 
   @Column({ type: 'date' })
   public date: Date;

@@ -1,18 +1,16 @@
 /* eslint-disable prettier/prettier */
 import { Fiche } from 'src/fiche/entities/fiche.entity';
 import {ProjetAff } from 'src/projet-affected/entities/projet-affected.entity';
-import { Role } from 'src/role/entities/role.entity';
-import { RoleAffect } from 'src/roleaffect/entities/roleaffect.entity';
-import { Entity, PrimaryGeneratedColumn, Column,ManyToOne, ManyToMany, JoinTable} from 'typeorm';
-
+import { UsersToRole } from 'src/roletouser/entities/roletouser.entity';
+import { Entity, PrimaryGeneratedColumn, Column,ManyToOne, OneToMany} from 'typeorm';
 
 @Entity()
 export class Users {
   @PrimaryGeneratedColumn()
-  public id!: number;
+  public id: number;
 
   @Column({ type: 'varchar', length: 120 })
-  public nom?: string;
+  public nom: string;
 
   @Column({ type: 'varchar', length: 120 })
   public email: string;
@@ -27,21 +25,24 @@ export class Users {
   @Column({type : 'date'})
   public brithday: Date;
 
-  @Column({ type: 'varchar', length: 8 })
-  public categorie: string;
+  @Column({ type: 'varchar', length: 120 })
+  categorie: string;
 
   @Column({ type: 'varchar', length: 8 })
   public phone: string;
 
-  @ManyToMany(() => Role)
-  @JoinTable()
-    rolesAffected: Role[];
-  
   @ManyToOne(() => ProjetAff)
   projectAff: ProjetAff
    
   @ManyToOne(() => Fiche)
   fiche: Fiche;
-  @ManyToOne(() => RoleAffect)
-  roleAffect: RoleAffect;
+  
+  @OneToMany(() => UsersToRole, (usersToRole) => usersToRole.role)
+  usersToRole!: UsersToRole[];
+
+
+}
+
+function OnDelete(arg0: any) {
+  throw new Error('Function not implemented.');
 }

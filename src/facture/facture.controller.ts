@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { FactureService } from './facture.service';
 import { CreateFactureDto } from './dto/create-facture.dto';
 import { UpdateFactureDto } from './dto/update-facture.dto';
@@ -9,26 +10,26 @@ export class FactureController {
 
   @Post()
   create(@Body() createFactureDto: CreateFactureDto) {
-    return this.factureService.create(createFactureDto);
+    return this.factureService.createFacture(createFactureDto);
   }
 
   @Get()
   findAll() {
-    return this.factureService.findAll();
+    return this.factureService.getAllFacture();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.factureService.findOne(+id);
+    return this.factureService.getFactureById(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateFactureDto: UpdateFactureDto) {
-    return this.factureService.update(+id, updateFactureDto);
+    return this.factureService.updateFacture(+id, updateFactureDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.factureService.remove(+id);
+    return this.factureService.deleteFacture(+id);
   }
 }
